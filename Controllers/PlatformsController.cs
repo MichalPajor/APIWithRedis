@@ -39,7 +39,7 @@ namespace APIWithRedis.Controllers
             _repo.CreatePlatform(platformModel);
 
             var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
-            return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id}, platformReadDto );
+            return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
         }
         [HttpPut("{id}")]
         public ActionResult UpdatePlatform(string id, PlatformUpdateDto platformUpdateDto)
@@ -68,6 +68,19 @@ namespace APIWithRedis.Controllers
             {
                 _repo.DeletePlatform(id);
                 return NoContent();
+            }
+        }
+        [HttpGet]
+        public ActionResult GetAllPlatforms()
+        {
+            var platformsFromDb = _repo.GetAllPlatforms();
+            if (platformsFromDb == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(_mapper.Map<IEnumerable<PlatformReadDto>>(platformsFromDb));
             }
         }
     }
