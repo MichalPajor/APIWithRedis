@@ -49,7 +49,6 @@ docker-compose up -d
 - register repository interface in Program.cs
 ## 6. Add Auto Mapper to Program.cs and create Profile
 
-```
 ## 7. Create controller with endpoints
 - use auto mapper
 ## 10. Config Swagger
